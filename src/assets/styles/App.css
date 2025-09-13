@@ -1,5 +1,5 @@
 /* Globales */
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 h1,
 h2,
 h3 {
@@ -11,14 +11,18 @@ h3 {
 .contenedor {
   /*max-width: 1200px; es el ancho maximo de la pagina*/
   max-width: 120rem;
-  margin: 0 auto;
   /*centra el contenedor*/
+  margin: 0 auto;
+  padding-left: 6rem;
+  padding-right: 6rem;
+
+  /* Opcional: color de texto por defecto */
+  color: #ffffff;
 }
 
 a {
-  text-decoration: none;
   /*quita el subrayado*/
-  color: black;
+  text-decoration: none;
 }
 
 h1 {
@@ -49,10 +53,110 @@ img {
 /*********************************************/
 
 
+.app-container {
+  display: flex;
+  gap: 2rem;
+  min-height: 80vh; /* hace que ocupe toda la altura de la ventana */
+}
+
+/* Parte de informacion personal */
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 55rem;
+  padding: 10rem 0;
+}
+
+.header h1 {
+   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+   font-size: 6rem;
+   font-weight: 700; /* Corregido: era 600, ahora es más bold */
+   margin: 0;
+   color: #ffffff; /* Blanco para el nombre principal */
+   letter-spacing: -0.02em; /* Espaciado más ajustado para texto grande */
+}
+
+.header h2 {
+   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+   margin: 0;
+   font-size: 3rem;
+   font-weight: 400; /* Peso normal para el subtítulo */
+   color: #fdfeff; /* Color gris azulado como en la imagen */
+}
 
 
-header{
-    text-align: center;
-    font-size: 900;
-    
+.header p {
+   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+   margin: 2rem 0 0 0;
+   font-size: 15px;
+   font-weight: 400;
+   color: #94a3b8; /* Color gris más claro para la descripción */
+   line-height: 1.6; /* Mejor legibilidad */
+}
+
+
+/* Barra de navegacion */
+
+.nav{
+  margin-top: 2rem;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav li{
+  position: relative;
+  padding-left: 3rem; /*espacio para la linea*/
+  margin: 1rem 0;
+  color: rgba(255, 255, 255, 0.5); /* texto gris */
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease, padding-left 0.2s; /* Agregamos transform a la transición */
+}
+
+/* Linea izq del las opciones */
+.nav li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px; /* longitud de la línea */
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.2); /* línea oscura por defecto */
+  transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+/* Hover: ilumina el texto, mueve la palabra y anima la línea */
+.nav li:hover {
+ 
+  color: #ffffff;
+  padding-left: 5rem; /*espacio para la linea*/
+}
+
+.nav li:hover::before {
+  background-color: #ffffff;
+  width: 35px; /* animación de crecer */
+}
+
+.social-media{
+  list-style: none;
+  padding: 0; /*quita el padding predeterminado */
+  margin: 0; /*  quita el margin predeterminado */
+  display: flex;
+  gap: 3rem; /* Espaciado entre elementos */
+}
+
+.social-media a{
+  color: rgba(198, 191, 191, 0.552);
+
+}
+
+.social-media a:hover {
+  color: rgb(255, 255, 255);
+  transform: translateY(-2px); /* Efecto de elevación */
 }

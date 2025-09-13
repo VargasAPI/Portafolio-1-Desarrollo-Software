@@ -12,8 +12,15 @@ html {
 
 body {
   font-family: "Raleway", sans-serif;
-  font-size: 1.6rem;
   /* 16px */
-  line-height: 2;
+  font-size: 1.6rem;
   /*line-height es el espacio entre lineas*/
+  line-height: 2;
+  
+  /* Fondo general */
+  background-color: #0a192f; /* un azul oscuro típico */
+  transition: background-color 0.3s ease;
+https://brittanychiang.com/
 }
+
+

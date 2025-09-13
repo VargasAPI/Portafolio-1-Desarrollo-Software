@@ -1,0 +1,58 @@
+/* Globales */
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair", serif;
+  margin: 0 0 5rem 0;
+  /*margin: top right bottom left*/
+}
+
+.contenedor {
+  /*max-width: 1200px; es el ancho maximo de la pagina*/
+  max-width: 120rem;
+  margin: 0 auto;
+  /*centra el contenedor*/
+}
+
+a {
+  text-decoration: none;
+  /*quita el subrayado*/
+  color: black;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/********************************************/
+
+/*Utilidades*/
+.text-center {
+  text-align: center;
+  /*centra el texto*/
+}
+
+/*********************************************/
+
+
+
+
+header{
+    text-align: center;
+    font-size: 900;
+    
+}

@@ -95,7 +95,7 @@ function App() {
                   En mis proyectos, me especializo en crear experiencias web
                   modernas utilizando
                   <strong>
-                    <spam>React</spam>
+                    <spam> React</spam>
                   </strong>
                   ,
                   <strong>
@@ -103,7 +103,7 @@ function App() {
                   </strong>
                   , y
                   <strong>
-                    <spam>Node.js</spam>
+                    <spam> Node.js</spam>
                   </strong>
                   . Disfruto trabajando en equipos colaborativos donde puedo
                   contribuir con ideas creativas y soluciones técnicas

@@ -114,7 +114,6 @@ spam{
   color: #ffffff;
 }
 
-
 /* ===========================================
    LAYOUT CONTAINERS
 =========================================== */
@@ -204,6 +203,52 @@ spam{
 /* ===========================================
    PANEL DERECHO - Mobile First
 =========================================== */
+
+/*IMG-SECTION*/
+.about-image {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  justify-content: center;
+}
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-gray-line);
+  transition: all var(--transition-smooth);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.profile-photo:hover {
+  border-color: var(--color-white);
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+/*RESPONSIVE IMG*/
+@media (min-width: 768px) {
+  .nosotros-section {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .about-image {
+    margin-bottom: 0;
+    justify-content: center;
+  }
+
+  .profile-photo {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+
+.nosotros-section{
+  padding-top: 0 ;
+}
+
+
 .panel-derecho {
   padding: var(--spacing-lg) 0;
   width: 100%;
@@ -257,6 +302,9 @@ section {
 section {
   scroll-margin-top: 2rem;
 }
+
+
+
 /* ===========================================
    EXPERIENCE - LINKEND STYLE
 =========================================== */

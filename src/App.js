@@ -1,6 +1,8 @@
 import React from "react";
 import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
 import "./assets/styles/App.css";
+import perfilImg from './assets/img/perfil.jpeg';
+
 
 function App() {
   return (
@@ -19,19 +21,16 @@ function App() {
               <nav className="nav">
                 <ul>
                   <li>
-                    {" "}
+                    
                     <a href="#about">ABOUT</a>
                   </li>
                   <li>
-                    {" "}
+                  
                     <a href="#experience">EXPERIENCE</a>
                   </li>
+
                   <li>
-                    {" "}
-                    <a href="#projects">PROJECTS</a>
-                  </li>
-                  <li>
-                    {" "}
+                   
                     <a href="#tec_courses">TEC COURSE</a>
                   </li>
                 </ul>
@@ -67,6 +66,13 @@ function App() {
           {/* Panel-derecho */}
           <main className="panel-derecho">
             <section id="about" className="nosotros-section">
+              <div className="about-image">
+        <img 
+          src={perfilImg}
+          alt="Foto de perfil - Desarrollador" 
+          className="profile-photo"
+        />
+      </div>
               <div className="contenido-section">
                 <p className="nosotros-intro">
                   Soy un desarrollador apasionado por crear soluciones digitales
@@ -143,6 +149,13 @@ function App() {
                   </div>
                 </div>
               </div>
+            </section>
+
+            {/* Estructura para la seccion de Tec. */}
+            <section id="tec_courses" className="courses-section">
+
+
+
             </section>
           </main>
         </div>

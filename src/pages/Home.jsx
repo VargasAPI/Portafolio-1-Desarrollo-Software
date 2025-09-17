@@ -34,6 +34,11 @@ function Home() {
                       
                         <Link to="/Courses">TEC COURSE</Link>
                      </li>
+
+                     <li>
+                      
+                        <Link to="/Comments">COMMENTS</Link>
+                     </li>
                    </ul>
                  </nav>
                </div>
@@ -84,10 +89,10 @@ function Home() {
                    </p>
    
                    <p className="nosotros-intro">
-                     Actualmente estoy cursando{" "}
+                     Actualmente estoy cursando
                      <strong>
                        <spam>Ingenieria de computacion</spam>
-                     </strong>{" "}
+                     </strong>
                      en el
                      <strong>
                        <spam> Tecnológico de Costa Rica</spam>
@@ -135,7 +140,7 @@ function Home() {
                            <h4 className="job-title">
                              Senior Frontend Engineer, Accessibility
                            </h4>
-                           <span className="company-name">Klaviyo ↗</span>
+                           <span className="company-name">TecDigital ↗</span>
                          </div>
                          <p className="job-description">
                            working on Tec-digital(ejemplo)
@@ -148,12 +153,41 @@ function Home() {
                          </div>
                        </div>
                      </div>
+
+
+
+
+                      <div className="experience-header">
+                       <div className="experience-period">
+                         <span className="period-text">2022 — 2023</span>
+                       </div>
+                       <div className="experience-content">
+                         <div className="job-title-company">
+                           <h4 className="job-title">
+                             Cajero – Atención al Cliente
+                           </h4>
+                           <span className="company-name">Almacen el Rey ↗</span>
+                         </div>
+                         <p className="job-description">
+                           Encargado de la gestión de cobros y pagos, arqueo de caja, registro de transacciones en el sistema, control de facturas y apoyo en tareas administrativas. Atención al cliente para resolver consultas y garantizar un servicio eficiente y confiable.
+                         </p>
+                         <div className="tech-tags">
+                           <span className="tech-tag">Responsable</span>
+                           <span className="tech-tag">Resolutivo</span>
+                           <span className="tech-tag">Trabajo en equipo</span>
+                           <span className="tech-tag">Manejo básico de sistemas informáticos</span>
+                         </div>
+                       </div>
+
+
+                       
+                     </div>
                    </div>
                  </div>
                </section>
    
                   {/* Estructuras extra */}
-               <section id="#" className="courses-section">
+               <section id="#comments" className="comments-section">
    
    
    

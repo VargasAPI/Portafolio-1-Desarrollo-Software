@@ -110,9 +110,10 @@ p {
   color: var(--color-gray-light);
   line-height: 1.6;
 }
-spam{
+span{
   color: #ffffff;
 }
+
 
 /* ===========================================
    LAYOUT CONTAINERS
@@ -161,13 +162,14 @@ spam{
 }
 
 .nav li {
-  position: relative;
-  padding: var(--spacing-sm) 0;
-  color: var(--color-gray-medium);
-  font-weight: 600;
-  cursor: pointer;
-  transition: color var(--transition-smooth);
-  text-align: center;
+    position: relative;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-gray-medium);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color var(--transition-smooth);
+    text-align: center;
+    width: 155px; /* Ancho fijo  */
 }
 
 .nav li:hover {
@@ -199,6 +201,22 @@ spam{
   color: var(--color-white);
   transform: translateY(-2px);
 }
+
+
+.pdf-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-gray-dark);
+  transition: color 0.3s ease;
+}
+
+.pdf-button:hover {
+  color: #e74c3c; /* Color rojo para PDF */
+}
+
+
 
 /* ===========================================
    PANEL DERECHO - Mobile First
@@ -603,4 +621,38 @@ section {
   .experience-item:not(:last-child)::after {
     left: calc(100px - 0.5px);
   }
+}
+
+
+
+/* Estilos para la impresión con fondo negro */
+@media print {
+  /* Configuración general para impresión */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  body {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  
+  /* Social media icons - convertir a texto para impresión */
+  .social-media {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  /* Ocultar el botón PDF en la impresión */
+  .pdf-button {
+    display: none;
+  }
+  
 }

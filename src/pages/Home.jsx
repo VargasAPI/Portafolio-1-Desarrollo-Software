@@ -3,7 +3,6 @@ import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
-  FaEnvelope,
   FaFilePdf,
 } from "react-icons/fa";
 import "../assets/styles/Home.css";

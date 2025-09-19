@@ -102,50 +102,44 @@ function Home() {
             </div>
             <div className="contenido-section">
               <p className="nosotros-intro">
-                Soy un desarrollador apasionado por crear soluciones digitales
-                innovadoras que combinan diseño elegante con funcionalidad
-                robusta. Mi enfoque se centra en desarrollar aplicaciones web
-                que no solo se vean increíbles, sino que también ofrezcan una
-                experiencia de usuario excepcional.
+                I am a developer passionate about creating innovative digital solutions that combine elegant design with robust functionality. My focus is on developing web applications that not only look amazing but also provide an exceptional user experience.
               </p>
 
-              <p className="nosotros-intro">
-                Actualmente estoy cursando
-                <strong>
-                  <span> Ingenieria de computacion </span>
-                </strong>
-                en el
-                <strong>
-                  <span> Tecnológico de Costa Rica</span>
-                </strong>
-                , donde he desarrollado sólidas habilidades en tecnologías tanto
-                de frontend como backend. Mi experiencia abarca desde la
-                creación de interfaces de usuario intuitivas hasta el desarrollo
-                de sistemas backend escalables.
-              </p>
+             <p className="nosotros-intro">
+  I am currently pursuing a
+  <strong>
+    <span> Computer Engineering </span>
+  </strong>
+  degree at the
+  <strong>
+    <span> Tecnologico de Costa Ricas</span>
+  </strong>
+  , where I have developed strong skills in both frontend and backend
+  technologies. My experience ranges from creating intuitive user interfaces
+  to developing scalable backend systems.
+</p>
 
-              <p className="nosotros-description1">
-                En mis proyectos, me especializo en crear experiencias web
-                modernas utilizando
-                <strong>
-                  <span> React</span>
-                </strong>
-                ,
-                <strong>
-                  <span>JavaScript</span>
-                </strong>
-                , y
-                <strong>
-                  <span> Node.js</span>
-                </strong>
-                . Disfruto trabajando en equipos colaborativos donde puedo
-                contribuir con ideas creativas y soluciones técnicas efectivas.
-              </p>
+<p className="nosotros-description1">
+  In my projects, I specialize in building modern web experiences using
+  <strong>
+    <span> React</span>
+  </strong>
+  ,
+  <strong>
+    <span> JavaScript</span>
+  </strong>
+  , and
+  <strong>
+    <span> Node.js</span>
+  </strong>
+  . I enjoy working in collaborative teams where I can contribute with
+  creative ideas and effective technical solutions.
+</p>
 
-              <p className="tech-description1">
-                <TechSkills />
-               
-              </p>
+<p className="tech-description1">
+  <TechSkills />
+</p>
+
             </div>
           </section>
 

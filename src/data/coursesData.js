@@ -83,7 +83,7 @@ export const coursesData = [
                 fechaEntrega: "19/09/25",
                 tecnologias: ["HTML", "CSS"],
                 repositorio: "https://github.com/VargasAPI/portafolio6-Desarrolo-web",
-                sitioWeb: "magnificent-syrniki-b873be.netlify.app",
+                sitioWeb: null,
                 estado: "Completado"
             }
         ]

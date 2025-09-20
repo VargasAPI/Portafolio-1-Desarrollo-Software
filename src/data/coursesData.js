@@ -74,6 +74,17 @@ export const coursesData = [
                 repositorio: "https://github.com/VargasAPI/laboratorio-2--desarolloSoftware/tree/lab5-responsive",
                 sitioWeb: "magnificent-syrniki-b873be.netlify.app",
                 estado: "Completado"
+            },
+             {
+                id: 5,
+                nombre: "Lab6-Desarrollo Software",
+                tipoEvaluacion: "Laboratorio",
+                descripcion: "Trabajamos con practicas DOM para aprender a usar las herramientas",
+                fechaEntrega: "19/09/25",
+                tecnologias: ["HTML", "CSS"],
+                repositorio: "https://github.com/VargasAPI/portafolio6-Desarrolo-web",
+                sitioWeb: "magnificent-syrniki-b873be.netlify.app",
+                estado: "Completado"
             }
         ]
     }

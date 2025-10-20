@@ -17,13 +17,13 @@ function CommentsUsers() {
     token:
       "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",
   };
-  // Carga comentarios al montar el componente
-  useEffect(() => {
-    loadComments();
-  }, []);
+ 
 
+ 
+
+ useEffect(() => {
   const loadComments = async () => {
-    try {
+       try {
       const response = await fetch(
         `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=open&labels=comment`,
         {
@@ -62,6 +62,10 @@ function CommentsUsers() {
       ]);
     }
   };
+ 
+  loadComments();
+}, []);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

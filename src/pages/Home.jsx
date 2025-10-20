@@ -8,7 +8,7 @@ import {
 import "../assets/styles/Home.css";
 import perfilImg from "../assets/img/perfil.jpeg";
 import TechSkills from "./TechSkills";
-import Comments_Users from "./Comments_Users";
+
 
 import { Link } from "react-router-dom";
 

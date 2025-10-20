@@ -24,3 +24,4 @@ yarn-error.log*
 #Esto ignora el archivo de variables de entorno
 src/.env
 /.env
+.env

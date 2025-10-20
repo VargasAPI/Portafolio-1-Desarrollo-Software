@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/Comments_Users.css";
 
-// ✅ Configuración de GitHub desde .env
+// ✅ ConfiguraciónS de GitHub desde .env
 const GITHUB_CONFIG = {
   owner: "VargasAPI",
   repo: "portfolio-comments",
   token: import.meta.env.VITE_GITHUB_TOKEN,
-};
+}; 
 
 function CommentsUsers() {
   const [comments, setComments] = useState([]);

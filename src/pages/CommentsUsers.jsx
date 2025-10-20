@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/Comments_Users.css";
 
+// ✅ Configuración fija de GitHub fuera del componente
+const GITHUB_CONFIG = {
+  owner: "VargasAPI",
+  repo: "portfolio-comments",
+  token:
+    "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",
+};
+
 function CommentsUsers() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ name: "", message: "" });
@@ -9,63 +17,51 @@ function CommentsUsers() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [progress, setProgress] = useState(0);
 
-  // GitHub configuration
+  // ✅ useEffect sin advertencias
+  useEffect(() => {
+    const loadComments = async () => {
+      try {
+        const response = await fetch(
+          `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=open&labels=comment`,
+          {
+            headers: {
+              Authorization: `token ${GITHUB_CONFIG.token}`,
+              Accept: "application/vnd.github.v3+json",
+            },
+          }
+        );
 
-  const GITHUB_CONFIG = {
-    owner: "VargasAPI",
-    repo: "portfolio-comments",
-    token:
-      "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",
-  };
- 
+        if (!response.ok) throw new Error("ERROR: Unable to load comments");
 
- 
+        const issues = await response.json();
+        const formattedComments = issues.map((issue) => ({
+          id: issue.number,
+          name: issue.title,
+          message: issue.body,
+          date: new Date(issue.created_at).toLocaleDateString("es-ES", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+        }));
 
- useEffect(() => {
-  const loadComments = async () => {
-       try {
-      const response = await fetch(
-        `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=open&labels=comment`,
-        {
-          headers: {
-            Authorization: `token ${GITHUB_CONFIG.token}`,
-            Accept: "application/vnd.github.v3+json",
+        setComments(formattedComments);
+      } catch (err) {
+        console.error("Error loading comments:", err);
+        setComments([
+          {
+            id: 1,
+            name: "Demo User",
+            message:
+              "This is a demo comment. Hi everyone! and welcome to the comments section.",
+            date: new Date().toLocaleDateString("es-ES"),
           },
-        }
-      );
+        ]);
+      }
+    };
 
-      if (!response.ok) throw new Error("ERROR: Unable to load comments");
-
-      const issues = await response.json();
-      const formattedComments = issues.map((issue) => ({
-        id: issue.number,
-        name: issue.title,
-        message: issue.body,
-        date: new Date(issue.created_at).toLocaleDateString("es-ES", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
-      }));
-
-      setComments(formattedComments);
-    } catch (err) {
-      console.error("Error loading comments:", err);
-      setComments([
-        {
-          id: 1,
-          name: "Demo User",
-          message:
-            "This is a demo comment.Hi everyone! and welcome to the comments section.",
-          date: new Date().toLocaleDateString("es-ES"),
-        },
-      ]);
-    }
-  };
- 
-  loadComments();
-}, []);
-
+    loadComments();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -81,7 +77,7 @@ function CommentsUsers() {
     }
 
     if (newComment.message.length > 500) {
-      setError("The message cant be longer than 500 characters");
+      setError("The message can't be longer than 500 characters");
       return;
     }
 
@@ -108,19 +104,17 @@ function CommentsUsers() {
         }
       );
 
-      if (!response.ok) throw new Error("Error: Cant submit comment");
+      if (!response.ok) throw new Error("Error: Can't submit comment");
 
-      // Mostrar mensaje de éxito
       setSuccessMessage(
-        "Uploading comment. Please wait while its being processed… (max 1 minute)"
+        "Uploading comment. Please wait while it's being processed… (max 1 minute)"
       );
 
-      // Limpiar formulario
       setNewComment({ name: "", message: "" });
 
-      // Barra de progreso (1 min)
-      let duration = 100000; 
-      let intervalTime = 500; // actualiza cada 0.5s
+      // Simular barra de progreso (1 minuto)
+      let duration = 100000; // 100 segundos
+      let intervalTime = 500;
       let startTime = Date.now();
 
       const interval = setInterval(() => {
@@ -130,11 +124,11 @@ function CommentsUsers() {
 
         if (percentage >= 100) {
           clearInterval(interval);
-          window.location.reload(); // recarga al final
+          window.location.reload();
         }
       }, intervalTime);
     } catch (err) {
-      setError("Error al enviar el comentario. Por favor intenta de nuevo.");
+      setError("Error submitting comment. Please try again.");
       console.error("Error submitting comment:", err);
     } finally {
       setIsLoading(false);
@@ -144,7 +138,6 @@ function CommentsUsers() {
   return (
     <div className="contenedor">
       <div className="comments-container">
-        {/* Botón regresar */}
         <button className="back-button" onClick={() => window.history.back()}>
           <span className="back-arrow">←</span>
           <span className="back-text">Back</span>
@@ -153,11 +146,11 @@ function CommentsUsers() {
         <header className="comments-header">
           <h1>Comments</h1>
           <p className="comments-subtitle">
-            Share your ideas, suggestions, or just say hi! I would love to hear from you.
+            Share your ideas, suggestions, or just say hi! I would love to hear
+            from you.
           </p>
         </header>
 
-        {/* Formulario para nuevo comentario */}
         <section className="comment-form-section">
           <h2>Write your comment</h2>
           <form onSubmit={handleSubmit} className="comment-form">
@@ -211,7 +204,6 @@ function CommentsUsers() {
           </form>
         </section>
 
-        {/* Lista de comentarios */}
         <section className="comments-list-section">
           <h2>
             Recent comments{" "}

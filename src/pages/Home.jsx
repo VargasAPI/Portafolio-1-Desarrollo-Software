@@ -5,6 +5,7 @@ import {
   FaInstagram,
   FaFilePdf,
 } from "react-icons/fa";
+
 import "../assets/styles/Home.css";
 import perfilImg from "../assets/img/perfil.jpeg";
 import TechSkills from "./TechSkills";

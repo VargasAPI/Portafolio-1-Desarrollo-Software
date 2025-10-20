@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/Comments_Users.css";
 
-function Comments_Users() {
+function CommentsUsers() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ name: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -242,4 +242,4 @@ function Comments_Users() {
   );
 }
 
-export default Comments_Users;
+export default CommentsUsers;

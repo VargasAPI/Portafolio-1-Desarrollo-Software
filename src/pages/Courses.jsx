@@ -23,7 +23,7 @@ function Courses() {
       Proyecto: "#3b82f6",
       Tarea: "#f59e0b",
       Investigacion: "#8b5cf6",
-      Examen: "#ef4444",
+      Quiz: "#ef4444",
       Otro: "#6b7280",
     };
     return colors[tipo] || "#6b7280";

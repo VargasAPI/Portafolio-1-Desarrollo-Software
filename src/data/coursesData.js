@@ -86,6 +86,29 @@ export const coursesData = [
                 sitioWeb: null,
                 estado: "Completado"
             }
+            ,
+             {
+                id: 6,
+                nombre: "Lab7-Desarrollo Software",
+                tipoEvaluacion: "Investigacion",
+                descripcion: "Trabajamos con JWT y API KEY para aprender a usar las herramientas",
+                fechaEntrega: "2/10/25",
+                tecnologias: ["API_KEY", "JWT"],
+                repositorio: null,
+                sitioWeb: null,
+                estado: "Completado"
+            }
+            ,
+             {
+                id: 5,
+                nombre: "Lab8-Desarrollo Software",
+                tipoEvaluacion: "Quiz",
+                descripcion: "Se realizo un kahoot para repasar los temas vistos en clase",
+                fechaEntrega: "8/10/25",
+                tecnologias: ["API_KEY", "JWT"],
+                sitioWeb: null,
+                estado: "Completado"
+            }
         ]
     }
 ];

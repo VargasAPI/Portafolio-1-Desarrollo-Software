@@ -8,7 +8,7 @@ import {
 import "../assets/styles/Home.css";
 import perfilImg from "../assets/img/perfil.jpeg";
 import TechSkills from "./TechSkills";
-import Comments_Users from "./Comments_Users";
+
 
 import { Link } from "react-router-dom";
 
@@ -204,9 +204,6 @@ function Home() {
               </div>
             </div>
           </section>
-
-          {/* Estructuras extra para futuro */}
-          <section id="#comments" className="comments-section"></section>
         </main>
       </div>
     </div>

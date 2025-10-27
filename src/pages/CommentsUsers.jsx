@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/Comments_Users.css";
 
-// ✅ ConfiguraciónS de GitHub desde .env
-const GITHUB_CONFIG = {
-  owner: "VargasAPI",
-  repo: "portfolio-comments",
-  token: import.meta.env.VITE_GITHUB_TOKEN,
-}; 
-
 function CommentsUsers() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ name: "", message: "" });
@@ -16,20 +9,12 @@ function CommentsUsers() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [progress, setProgress] = useState(0);
 
+  // Carga comentarios desde el backend Express
   useEffect(() => {
     const loadComments = async () => {
       try {
-        const response = await fetch(
-          `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=open&labels=comment`,
-          {
-            headers: {
-              Authorization: `token ${GITHUB_CONFIG.token}`,
-              Accept: "application/vnd.github.v3+json",
-            },
-          }
-        );
-
-        if (!response.ok) throw new Error("ERROR: Unable to load comments");
+        const response = await fetch("http://localhost:3001/api/comments");
+        if (!response.ok) throw new Error("Unable to load comments");
 
         const issues = await response.json();
         const formattedComments = issues.map((issue) => ({
@@ -46,6 +31,7 @@ function CommentsUsers() {
         setComments(formattedComments);
       } catch (err) {
         console.error("Error loading comments:", err);
+        // Modo demo
         setComments([
           {
             id: 1,
@@ -61,11 +47,13 @@ function CommentsUsers() {
     loadComments();
   }, []);
 
+  // 🔹 Manejo de cambios en inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewComment((prev) => ({ ...prev, [name]: value }));
   };
 
+  // 🔹 Envío del comentario al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -85,24 +73,13 @@ function CommentsUsers() {
     setProgress(0);
 
     try {
-      const response = await fetch(
-        `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `token ${GITHUB_CONFIG.token}`,
-            Accept: "application/vnd.github.v3+json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: newComment.name,
-            body: newComment.message,
-            labels: ["comment"],
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:3001/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newComment),
+      });
 
-      if (!response.ok) throw new Error("Error: Can't submit comment");
+      if (!response.ok) throw new Error("Error submitting comment");
 
       setSuccessMessage(
         "Uploading comment. Please wait while it's being processed… (max 1 minute)"
@@ -111,8 +88,8 @@ function CommentsUsers() {
       setNewComment({ name: "", message: "" });
 
       // Barra de progreso (1 min)
-      let duration = 100000; // 100 segundos
-      let intervalTime = 500; 
+      let duration = 60000; // 60 segundos
+      let intervalTime = 500;
       let startTime = Date.now();
 
       const interval = setInterval(() => {
@@ -122,7 +99,7 @@ function CommentsUsers() {
 
         if (percentage >= 100) {
           clearInterval(interval);
-          window.location.reload(); // recarga al final
+          window.location.reload();
         }
       }, intervalTime);
     } catch (err) {
@@ -196,7 +173,7 @@ function CommentsUsers() {
             )}
 
             <button type="submit" className="submit-button" disabled={isLoading}>
-              {isLoading ? "Enviando..." : "Send Comment"}
+              {isLoading ? "Sending..." : "Send Comment"}
             </button>
           </form>
         </section>

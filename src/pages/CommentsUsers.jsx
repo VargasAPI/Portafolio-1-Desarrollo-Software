@@ -7,20 +7,28 @@ function CommentsUsers() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const [progress, setProgress] = useState(0);
 
-  // 🔹 URL base del backend (usa Vercel o localhost automáticamente)
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+  // Variables de entorno
+  const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+  const REPO_OWNER = process.env.REACT_APP_REPO_OWNER || "VargasAPI";
+  const REPO_NAME = process.env.REACT_APP_REPO_NAME || "portfolio-comments";
 
-  // 🔹 Cargar comentarios desde el backend Express
+  const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues`;
+
+  // Cargar comentarios (issues)
   useEffect(() => {
     const loadComments = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/comments`);
+        const response = await fetch(API_URL, {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github+json",
+          },
+        });
         if (!response.ok) throw new Error("Unable to load comments");
 
         const issues = await response.json();
-        const formattedComments = issues.map((issue) => ({
+        const formatted = issues.map((issue) => ({
           id: issue.number,
           name: issue.title,
           message: issue.body,
@@ -30,17 +38,14 @@ function CommentsUsers() {
             day: "numeric",
           }),
         }));
-
-        setComments(formattedComments);
+        setComments(formatted);
       } catch (err) {
         console.error("Error loading comments:", err);
-        // 🟡 Modo demo si no hay conexión con el backend
         setComments([
           {
             id: 1,
             name: "Demo User",
-            message:
-              "This is a demo comment. Hi everyone! and welcome to the comments section.",
+            message: "This is a demo comment (offline mode). Try again later.",
             date: new Date().toLocaleDateString("es-ES"),
           },
         ]);
@@ -48,135 +53,111 @@ function CommentsUsers() {
     };
 
     loadComments();
-  }, [API_URL]);
+  }, [API_URL, GITHUB_TOKEN]);
 
-  // 🔹 Enviar comentario al backend
-  const enviarComentario = async (nuevoComentario) => {
-    const response = await fetch(`${API_URL}/api/comments`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(nuevoComentario),
-    });
-    if (!response.ok) throw new Error("Error submitting comment");
-    return await response.json();
-  };
-
-  // 🔹 Manejo de cambios en inputs
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewComment((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // 🔹 Envío del comentario
+  // Enviar comentario (crear issue)
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!newComment.name.trim() || !newComment.message.trim()) {
-      setError("Complete all fields before submitting");
-      return;
-    }
-
-    if (newComment.message.length > 500) {
-      setError("The message can't be longer than 500 characters");
+      setError("Please complete all fields before submitting");
       return;
     }
 
     setIsLoading(true);
     setError(null);
     setSuccessMessage(null);
-    setProgress(0);
 
     try {
-      await enviarComentario(newComment);
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: newComment.name,
+          body: newComment.message,
+          labels: ["comment"],
+        }),
+      });
 
-      setSuccessMessage(
-        "Uploading comment. Please wait while it's being processed… (max 1 minute)"
-      );
+      if (!response.ok) throw new Error("Error submitting comment");
+
+      setSuccessMessage("Comment submitted successfully!");
       setNewComment({ name: "", message: "" });
-
-      // Barra de progreso (1 min)
-      let duration = 60000; // 60 segundos
-      let intervalTime = 500;
-      let startTime = Date.now();
-
-      const interval = setInterval(() => {
-        let elapsed = Date.now() - startTime;
-        let percentage = Math.min((elapsed / duration) * 100, 100);
-        setProgress(percentage);
-
-        if (percentage >= 100) {
-          clearInterval(interval);
-          window.location.reload();
-        }
-      }, intervalTime);
+      setTimeout(() => window.location.reload(), 1500);
     } catch (err) {
       setError("Error submitting comment. Please try again.");
-      console.error("Error submitting comment:", err);
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Obtener iniciales para el avatar
+  const getInitials = (name) => {
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <div className="contenedor">
       <div className="comments-container">
-        <button className="back-button" onClick={() => window.history.back()}>
-          <span className="back-arrow">←</span>
-          <span className="back-text">Back</span>
-        </button>
-
         <header className="comments-header">
           <h1>Comments</h1>
           <p className="comments-subtitle">
-            Share your ideas, suggestions, or just say hi! I would love to hear from you.
+            Share your ideas, suggestions, or just say hi!
           </p>
         </header>
 
         <section className="comment-form-section">
-          <h2>Write your comment</h2>
+          <h2>Leave a Comment</h2>
           <form onSubmit={handleSubmit} className="comment-form">
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Your Name</label>
               <input
-                type="text"
                 id="name"
+                type="text"
                 name="name"
+                placeholder="John Doe"
                 value={newComment.name}
-                onChange={handleInputChange}
-                placeholder="Full Name"
-                maxLength="50"
+                onChange={(e) =>
+                  setNewComment({ ...newComment, name: e.target.value })
+                }
                 required
               />
-              <span className="char-count">{newComment.name.length}/50</span>
             </div>
 
             <div className="form-group">
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message">Your Comment</label>
               <textarea
                 id="message"
                 name="message"
+                placeholder="Share your thoughts..."
                 value={newComment.message}
-                onChange={handleInputChange}
-                placeholder="Write your comment here..."
-                maxLength="500"
-                rows="5"
+                onChange={(e) =>
+                  setNewComment({ ...newComment, message: e.target.value })
+                }
                 required
               />
-              <span className="char-count">{newComment.message.length}/500</span>
+              <span className="char-count">
+                {newComment.message.length} / 500
+              </span>
             </div>
 
-            {error && <div className="error-message">{error}</div>}
-
+            {error && <p className="error-message">{error}</p>}
             {successMessage && (
-              <>
-                <div className="success-message">{successMessage}</div>
+              <div>
+                <p className="success-message">{successMessage}</p>
                 <div className="progress-bar-container">
-                  <div
-                    className="progress-bar-fill"
-                    style={{ width: `${progress}%` }}
-                  ></div>
+                  <div className="progress-bar-fill"></div>
                 </div>
-              </>
+              </div>
             )}
 
             <button type="submit" className="submit-button" disabled={isLoading}>
@@ -187,12 +168,12 @@ function CommentsUsers() {
 
         <section className="comments-list-section">
           <h2>
-            Recent comments <span className="comment-count">({comments.length})</span>
+            Recent Comments <span className="comment-count">({comments.length})</span>
           </h2>
 
           {comments.length === 0 ? (
             <div className="no-comments">
-              <p>There’s no comments yet, be the first one to say hi!</p>
+              <p>No comments yet. Be the first to comment!</p>
             </div>
           ) : (
             <div className="comments-list">
@@ -200,7 +181,7 @@ function CommentsUsers() {
                 <article key={comment.id} className="comment-item">
                   <div className="comment-header">
                     <div className="comment-avatar">
-                      {comment.name.charAt(0).toUpperCase()}
+                      {getInitials(comment.name)}
                     </div>
                     <div className="comment-info">
                       <h3 className="comment-author">{comment.name}</h3>

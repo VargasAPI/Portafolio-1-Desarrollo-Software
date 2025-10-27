@@ -9,11 +9,14 @@ function CommentsUsers() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [progress, setProgress] = useState(0);
 
-  // Carga comentarios desde el backend Express
+  // 🔹 URL base del backend (usa Vercel o localhost automáticamente)
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
+  // 🔹 Cargar comentarios desde el backend Express
   useEffect(() => {
     const loadComments = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/comments");
+        const response = await fetch(`${API_URL}/api/comments`);
         if (!response.ok) throw new Error("Unable to load comments");
 
         const issues = await response.json();
@@ -31,7 +34,7 @@ function CommentsUsers() {
         setComments(formattedComments);
       } catch (err) {
         console.error("Error loading comments:", err);
-        // Modo demo
+        // 🟡 Modo demo si no hay conexión con el backend
         setComments([
           {
             id: 1,
@@ -45,7 +48,18 @@ function CommentsUsers() {
     };
 
     loadComments();
-  }, []);
+  }, [API_URL]);
+
+  // 🔹 Enviar comentario al backend
+  const enviarComentario = async (nuevoComentario) => {
+    const response = await fetch(`${API_URL}/api/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nuevoComentario),
+    });
+    if (!response.ok) throw new Error("Error submitting comment");
+    return await response.json();
+  };
 
   // 🔹 Manejo de cambios en inputs
   const handleInputChange = (e) => {
@@ -53,7 +67,7 @@ function CommentsUsers() {
     setNewComment((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 🔹 Envío del comentario al backend
+  // 🔹 Envío del comentario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -73,18 +87,11 @@ function CommentsUsers() {
     setProgress(0);
 
     try {
-      const response = await fetch("http://localhost:3001/api/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newComment),
-      });
-
-      if (!response.ok) throw new Error("Error submitting comment");
+      await enviarComentario(newComment);
 
       setSuccessMessage(
         "Uploading comment. Please wait while it's being processed… (max 1 minute)"
       );
-
       setNewComment({ name: "", message: "" });
 
       // Barra de progreso (1 min)

@@ -10,6 +10,7 @@ import perfilImg from "../assets/img/perfil.jpeg";
 import TechSkills from "./TechSkills";
 import Comments_Users from "./Comments_Users";
 
+
 import { Link } from "react-router-dom";
 
 // Función para manejar la impresión a PDF

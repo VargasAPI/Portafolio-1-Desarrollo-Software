@@ -109,6 +109,11 @@ function CommentsUsers() {
     <div className="contenedor">
       <div className="comments-container">
         <header className="comments-header">
+          <button className="back-button" onClick={() => window.history.back()}>
+            <span className="back-arrow">←</span>
+            <span className="back-text">Back</span>
+          </button>
+          
           <h1>Comments</h1>
           <p className="comments-subtitle">
             Share your ideas, suggestions, or just say hi!

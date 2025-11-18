@@ -44,6 +44,10 @@ function Home() {
                 <li>
                  <Link to="/Comments">COMMENTS</Link>
                 </li>
+
+                <li>
+                 <Link to="/More">MORE...</Link>
+                </li>
               </ul>
             </nav>
           </div>
@@ -134,9 +138,9 @@ function Home() {
   creative ideas and effective technical solutions.
 </p>
 
-<p className="tech-description1">
+<div className="tech-description1">
   <TechSkills />
-</p>
+</div>
 
             </div>
           </section>

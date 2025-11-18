@@ -1,0 +1,208 @@
+/* ===========================================
+   SECCIONES ACORDEÓN - MORE COMPONENT
+=========================================== */
+
+/* Contenedor principal de las secciones */
+.more-section {
+  margin-bottom: 6.4rem;
+  padding-top: 4.8rem;
+}
+
+/* Título principal de la sección */
+.more-title {
+  color: #ffffff;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 4.8rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 1.6rem;
+}
+
+
+/* Contenedor de cada item acordeón */
+.accordion-item {
+  margin-bottom: 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Header del acordeón (la parte clickeable) */
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.4rem;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Título del acordeón */
+.accordion-title {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+/* Icono del acordeón (flecha) */
+.accordion-icon {
+  color: #94a3b8;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+  font-weight: bold;
+}
+
+/* Rotación del icono cuando está abierto */
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Contenido del acordeón */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 2.4rem;
+}
+
+/* Contenido cuando está abierto */
+.accordion-item.active .accordion-content {
+  max-height: 1000px;
+  padding: 0 2.4rem 2.4rem 2.4rem;
+}
+
+/* Texto dentro del acordeón */
+.accordion-text {
+  color: #94a3b8;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Lista dentro del acordeón */
+.accordion-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.6rem 0 0 0;
+}
+
+.accordion-list li {
+  color: #94a3b8;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  padding: 0.8rem 0;
+  padding-left: 2.4rem;
+  position: relative;
+}
+
+/* Bullet point personalizado */
+.accordion-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+}
+
+/* Enlaces dentro del acordeón */
+.accordion-link {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.accordion-link:hover {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Tags/etiquetas dentro del acordeón */
+.accordion-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.accordion-tag {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.accordion-tag:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ===========================================
+   RESPONSIVE - TABLET
+=========================================== */
+@media (min-width: 768px) {
+  .more-title {
+    font-size: 3rem;
+  }
+
+  .accordion-title {
+    font-size: 2.4rem;
+  }
+
+  .accordion-text,
+  .accordion-list li {
+    font-size: 1.5rem;
+  }
+
+  .accordion-header {
+    padding: 3.2rem;
+  }
+
+  .accordion-item.active .accordion-content {
+    padding: 0 3.2rem 3.2rem 3.2rem;
+  }
+
+  .accordion-tag {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* ===========================================
+   RESPONSIVE - DESKTOP
+=========================================== */
+@media (min-width: 1024px) {
+  .more-title {
+    font-size: 4rem;
+  }
+
+  .accordion-title {
+    font-size: 3rem;
+  }
+
+  .accordion-text,
+  .accordion-list li {
+    font-size: 1.6rem;
+  }
+}
